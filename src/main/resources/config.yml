@@ -1,0 +1,264 @@
+# Storage backend: "file" (default) or "mysql"
+# "file" stores player data as JSON files in the data/ folder
+# "mysql" uses a MySQL database (enables cross-server data sharing)
+storage:
+  type: file
+  mysql:
+    host: localhost
+    port: 3306
+    database: talequests
+    username: root
+    password: ""
+    table_prefix: "tq_"
+    pool:
+      max_size: 10
+      min_idle: 2
+      connection_timeout: 5000
+      max_lifetime: 1800000
+
+debug: false
+language: en
+completion_message_type: TITLE
+show_quest_started_title: true
+# Quest progress notification type: CHAT, NOTIFICATION, BOTH, NONE
+# CHAT = text message in chat, NOTIFICATION = item pickup style popup, BOTH = both, NONE = disabled
+progress_notify_type: CHAT
+# Progress notification interval (percentage): 25 = every 25%, 10 = every 10%, 0 = disabled
+progress_notify_percent: 25
+# NPC quest progress notification type: NOTIFICATION, CHAT, BOTH, NONE
+npc_progress_notify_type: NOTIFICATION
+# NPC progress notification interval (percentage): 25 = every 25%, 10 = every 10%, 0 = disabled
+npc_progress_notify_percent: 25
+# Reward notification type: CHAT, NOTIFICATION, BOTH, NONE
+# Controls how money/item reward messages are delivered to the player
+reward_notify_type: CHAT
+quest_command: true
+quest_gui:
+  enable_hide_completed_toggle: true
+  show_category_dropdown: true
+  show_required_quest_name: true
+  hide_completed_npc_quests: false
+  # Hide quests whose prerequisites are not met (LOCKED status) from the quest list
+  hide_locked_quests: false
+  # Enable clicking a quest in the menu to open its detail page
+  quest_detail_click_enabled: true
+  # Auto-open quest detail page when an NPC quest is started or progress is reported
+  quest_detail_npc_auto_open: true
+  # Icons for requirement types in the quest detail page (used when target is not an item)
+  requirement_type_icons:
+    kill_mob: "Weapon_Sword_Iron"
+    kill_player: "Weapon_Sword_Iron"
+    chat_message: "Recipe_Page"
+  modules:
+    quests:
+      name: "Quests"
+      description: "Main story and side quests"
+      icon_id: "Weapon_Spellbook_Fire"
+    pools:
+      name: "Daily & Weekly"
+      description: "Rotating challenges with special rewards"
+      icon_id: "Tool_Pickaxe_Iron"
+    npc:
+      name: "NPC Quests"
+      description: "Special quests from NPCs"
+      icon_id: "Recipe_Page"
+currency:
+  symbol: "$"
+  format: "{symbol}{amount}"
+  icon_id: "Coin_Gold"
+block_tracker:
+  enabled: true
+  ttl_minutes: 300
+categories:
+  starter:
+    name: "Starter Quests"
+    description: "Begin your journey with these fundamental tasks"
+    icon_id: "Weapon_Sword_Wood"
+    weight: 1
+  gathering:
+    name: "Gathering & Resources"
+    description: "Collect materials and gather resources"
+    icon_id: "Tool_Pickaxe_Iron"
+    weight: 2
+  crafting:
+    name: "Crafting & Building"
+    description: "Create items and build structures"
+    icon_id: "Bench_WorkBench"
+    weight: 3
+  combat:
+    name: "Combat & Hunting"
+    description: "Fight monsters and hunt creatures"
+    icon_id: "Weapon_Longsword_Katana"
+    weight: 4
+quests:
+  miner_basics:
+    name: "Miner Basics"
+    description: "Break 20 Stone blocks."
+    category: "gathering"
+    weight: 1
+    icon_id: "Rock_Stone"
+    requirements:
+      - type: BREAK_BLOCK
+        target: "Rock_Stone"
+        amount: 20
+    rewards:
+      - type: MONEY
+        value: 50
+      - type: ITEM
+        value: "Furniture_Crude_Torch:5"
+  lumberjack:
+    name: "Lumberjack"
+    description: "Chop 10 Oak Logs."
+    category: "gathering"
+    weight: 2
+    icon_id: "Wood_Oak_Trunk"
+    requirements:
+      - type: BREAK_BLOCK
+        target: "Wood_Oak_Trunk"
+        amount: 10
+    rewards:
+      - type: MONEY
+        value: 30
+      - type: ITEM
+        value: "Weapon_Axe_Iron_Rusty:1"
+  craftsman:
+    name: "Craftsman"
+    description: "Have 1 Workbench in your inventory."
+    category: "starter"
+    weight: 3
+    icon_id: "Bench_WorkBench"
+    requirements:
+      - type: HAVE_ITEM
+        target: "Bench_WorkBench"
+        amount: 1
+    rewards:
+      - type: MONEY
+        value: 75
+  torch_maker:
+    name: "Torch Maker"
+    description: "Craft 8 Torches to light up your path."
+    category: "crafting"
+    weight: 4
+    icon_id: "Furniture_Crude_Torch"
+    requirements:
+      - type: CRAFT_ITEM
+        target: "Furniture_Crude_Torch"
+        amount: 8
+    rewards:
+      - type: MONEY
+        value: 40
+  beginner_builder:
+    name: "Beginner Builder"
+    description: "Place 15 Dirt blocks to flatten the ground."
+    category: "crafting"
+    weight: 5
+    icon_id: "Soil_Dirt"
+    requirements:
+      - type: PLACE_BLOCK
+        target: "Soil_Dirt"
+        amount: 15
+    rewards:
+      - type: MONEY
+        value: 20
+      - type: ITEM
+        value: "Plant_Seeds_Wheat:10"
+      - type: ITEM
+        value: "Plant_Seeds_Lettuce:10"
+  home_sweet_home:
+    name: "Home Sweet Home"
+    description: "Place 2 Wooden Chests."
+    category: "crafting"
+    weight: 6
+    icon_id: "Furniture_Crude_Chest_Small"
+    requirements:
+      - type: PLACE_BLOCK
+        target: "Furniture_Crude_Chest_Small"
+        amount: 2
+    rewards:
+      - type: MONEY
+        value: 200
+  beginner_smith:
+    name: "Beginner Smith"
+    description: "Craft 1 Copper Pickaxe."
+    category: "crafting"
+    weight: 7
+    icon_id: "Tool_Pickaxe_Copper"
+    requirements:
+      - type: CRAFT_ITEM
+        target: "Tool_Pickaxe_Copper"
+        amount: 1
+    rewards:
+      - type: MONEY
+        value: 60
+  iron_master:
+    name: "Iron Master"
+    description: "Have 6 Iron Ingot in your inventory."
+    category: "gathering"
+    weight: 8
+    icon_id: "Ingredient_Bar_Iron"
+    requirements:
+      - type: HAVE_ITEM
+        target: "Ingredient_Bar_Iron"
+        amount: 6
+    rewards:
+      - type: MONEY
+        value: 50
+      - type: COMMAND
+        value: "say {player} is now an Iron Master!"
+        display_name: "Unlocks: Iron Title"
+  hunter:
+    name: "Hunter"
+    description: "Kill 5 Sheeps."
+    category: "combat"
+    weight: 9
+    icon_id: "Weapon_Sword_Iron"
+    requirements:
+      - type: KILL_MOB
+        target: "Sheep"
+        amount: 5
+    rewards:
+      - type: MONEY
+        value: 100
+      - type: ITEM
+        value: "Tool_Pickaxe_Iron:1"
+  trork_slayer:
+    name: "Trork Slayer"
+    description: "Defeat 3 Trorks."
+    category: "combat"
+    weight: 10
+    icon_id: "Weapon_Longsword_Katana"
+    requirements:
+      - type: KILL_MOB
+        target: "Trork"
+        amount: 3
+    rewards:
+      - type: MONEY
+        value: 150
+      - type: ITEM
+        value: "Weapon_Longsword_Katana:1"
+  chatterbox:
+    name: "Chatterbox"
+    description: "Send 10 messages in chat."
+    category: "starter"
+    weight: 2
+    icon_id: "Recipe_Page"
+    requirements:
+      - type: CHAT_MESSAGE
+        target: ""
+        amount: 10
+    rewards:
+      - type: MONEY
+        value: 25
+  first_blood:
+    name: "First Blood"
+    description: "Defeat 1 player in combat."
+    category: "combat"
+    weight: 11
+    icon_id: "Weapon_Sword_Iron"
+    requirements:
+      - type: KILL_PLAYER
+        target: ""
+        amount: 1
+    rewards:
+      - type: MONEY
+        value: 200

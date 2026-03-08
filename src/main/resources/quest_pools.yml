@@ -1,0 +1,109 @@
+enabled: true
+
+pools:
+  daily_mining:
+    display_name: "Daily Mining Quests"
+    description: "Fresh mining challenges every day"
+    icon_id: "Tool_Pickaxe_Iron"
+    reset_interval: DAILY
+    selection_mode: RANDOM_PER_PLAYER
+    quest_count: 3
+    weight: 1
+    quests:
+      mine_stone_daily:
+        name: "Stone Collector"
+        description: "Mine 30 stone blocks"
+        icon_id: "Rock_Stone"
+        requirements:
+          - type: BREAK_BLOCK
+            target: "Rock_Stone"
+            amount: 30
+        rewards:
+          - type: MONEY
+            value: "75"
+      chop_wood_daily:
+        name: "Woodcutter"
+        description: "Chop 20 oak logs"
+        icon_id: "Wood_Oak_Trunk"
+        requirements:
+          - type: BREAK_BLOCK
+            target: "Wood_Oak_Trunk"
+            amount: 20
+        rewards:
+          - type: MONEY
+            value: "50"
+      iron_gatherer_daily:
+        name: "Iron Gatherer"
+        description: "Have 4 iron ingots"
+        icon_id: "Ingredient_Bar_Iron"
+        requirements:
+          - type: HAVE_ITEM
+            target: "Ingredient_Bar_Iron"
+            amount: 4
+        rewards:
+          - type: MONEY
+            value: "100"
+          - type: ITEM
+            value: "Tool_Pickaxe_Iron:1"
+      craft_torches_daily:
+        name: "Light Bearer"
+        description: "Craft 10 torches"
+        icon_id: "Furniture_Crude_Torch"
+        requirements:
+          - type: CRAFT_ITEM
+            target: "Furniture_Crude_Torch"
+            amount: 10
+        rewards:
+          - type: MONEY
+            value: "40"
+
+  weekly_combat:
+    display_name: "Weekly Combat Challenges"
+    description: "Tough combat missions that reset each week"
+    icon_id: "Weapon_Longsword_Katana"
+    reset_interval: WEEKLY
+    selection_mode: SAME_FOR_ALL
+    quest_count: 2
+    weight: 2
+    quests:
+      slay_sheep_weekly:
+        name: "Shepherd's Bane"
+        description: "Defeat 10 sheep"
+        icon_id: "Weapon_Sword_Iron"
+        requirements:
+          - type: KILL_MOB
+            target: "Sheep"
+            amount: 10
+        rewards:
+          - type: MONEY
+            value: "200"
+      trork_hunter_weekly:
+        name: "Trork Hunter"
+        description: "Defeat 5 trorks"
+        icon_id: "Weapon_Longsword_Katana"
+        requirements:
+          - type: KILL_MOB
+            target: "Trork"
+            amount: 5
+        rewards:
+          - type: MONEY
+            value: "500"
+          - type: COMMAND
+            value: "say {player} is a Trork Hunter!"
+            display_name: "Weekly Champion Title"
+      pvp_weekly:
+        name: "Arena Champion"
+        description: "Defeat 3 players"
+        icon_id: "Weapon_Sword_Iron"
+        requirements:
+          - type: KILL_PLAYER
+            target: ""
+            amount: 3
+        rewards:
+          - type: MONEY
+            value: "750"
+
+settings:
+  daily_reset_hour: 0
+  weekly_reset_day: 1
+  weekly_reset_hour: 0
