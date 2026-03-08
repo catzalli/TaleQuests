@@ -6,7 +6,7 @@ TaleQuests is a quest system plugin for Hytale servers. The API allows other plu
 
 ### 1. Add the API Jar
 
-Download `talequests-X.X.X-api.jar` and place it in a `libs/` folder inside your plugin project.
+Download `TaleQuestsAPI-X.X.X.jar` and place it in a `libs/` folder inside your plugin project.
 
 ### 2. Configure build.gradle
 
@@ -179,3 +179,4 @@ public class MyPlugin extends JavaPlugin {
 * **API quests and YAML quests coexist.** Players see both in the same quest menu. Events fire for both types.
 * **Thread safety.** Player data snapshots are immutable. The API is safe to call from any thread.
 * **All data objects are immutable.** `Quest`, `Category`, `Requirement`, `Reward`, `QuestPlayer`, and `PoolQuestInfo` are all read-only snapshots.
+
