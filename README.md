@@ -28,7 +28,7 @@ repositories {
     mavenCentral()
     maven {
         name = 'Asel Studios Repository'
-        url = '[https://repo.aselstudios.com/releases](https://repo.aselstudios.com/releases)'
+        url = 'https://repo.aselstudios.com/releases'
     }
 }
 
@@ -207,6 +207,7 @@ public class MyPlugin extends JavaPlugin {
 * **API quests and YAML quests coexist.** Players see both in the same quest menu. Events fire for both types.
 * **Thread safety.** Player data snapshots are immutable. The API is safe to call from any thread.
 * **All data objects are immutable.** `Quest`, `Category`, `Requirement`, `Reward`, `QuestPlayer`, and `PoolQuestInfo` are all read-only snapshots.
+
 
 
 
