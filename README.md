@@ -4,12 +4,11 @@ TaleQuests is a quest system plugin for Hytale servers. The API allows other plu
 
 ## Installation
 
-### 1. Add the API Jar
+You can easily add TaleQuestsAPI to your project using either Gradle or Maven. 
 
-Download `TaleQuestsAPI-X.X.X.jar` and place it in a `libs/` folder inside your plugin project.
-- https://repo.aselstudios.com/#/releases/org/aselstudios/TaleQuestsAPI
+### Gradle
 
-### 2. Configure build.gradle
+Add the Asel Studios repository and the TaleQuestsAPI dependency to your `build.gradle` file. Make sure to use `compileOnly` so the API is not bundled into your plugin.
 
 ```gradle
 plugins {
@@ -25,6 +24,14 @@ java {
     }
 }
 
+repositories {
+    mavenCentral()
+    maven {
+        name = 'Asel Studios Repository'
+        url = '[https://repo.aselstudios.com/releases](https://repo.aselstudios.com/releases)'
+    }
+}
+
 dependencies {
     // Hytale server API
     compileOnly(files(
@@ -32,8 +39,8 @@ dependencies {
         "/AppData/Roaming/Hytale/install/release/package/game/latest/Server/HytaleServer.jar"
     ))
 
-    // TaleQuests API jar
-    compileOnly(fileTree(dir: 'libs', include: ['*.jar']))
+    // TaleQuests API
+    compileOnly 'org.aselstudios:TaleQuestsAPI:1.0.5'
 }
 
 tasks.withType(JavaCompile).configureEach {
@@ -180,5 +187,6 @@ public class MyPlugin extends JavaPlugin {
 * **API quests and YAML quests coexist.** Players see both in the same quest menu. Events fire for both types.
 * **Thread safety.** Player data snapshots are immutable. The API is safe to call from any thread.
 * **All data objects are immutable.** `Quest`, `Category`, `Requirement`, `Reward`, `QuestPlayer`, and `PoolQuestInfo` are all read-only snapshots.
+
 
 
