@@ -49,6 +49,26 @@ tasks.withType(JavaCompile).configureEach {
 }
 ```
 
+### Maven
+```maven
+<repositories>
+    <repository>
+        <id>aselstudios-releases</id>
+        <name>Asel Studios Repository</name>
+        <url>https://repo.aselstudios.com/releases</url>
+    </repository>
+</repositories>
+
+<dependencies>
+    <dependency>
+        <groupId>org.aselstudios</groupId>
+        <artifactId>TaleQuestsAPI</artifactId>
+        <version>1.0.5</version>
+        <scope>provided</scope>
+    </dependency>
+</dependencies>
+```
+
 ### 3. Configure manifest.json
 
 Add TaleQuests as a dependency so your plugin loads after TaleQuests:
@@ -187,6 +207,7 @@ public class MyPlugin extends JavaPlugin {
 * **API quests and YAML quests coexist.** Players see both in the same quest menu. Events fire for both types.
 * **Thread safety.** Player data snapshots are immutable. The API is safe to call from any thread.
 * **All data objects are immutable.** `Quest`, `Category`, `Requirement`, `Reward`, `QuestPlayer`, and `PoolQuestInfo` are all read-only snapshots.
+
 
 
 
