@@ -105,6 +105,11 @@ if (!TaleQuestsAPI.isAvailable()) {
 TaleQuestsProvider api = TaleQuestsAPI.get();
 ```
 
+### 5. (Optional) For javadoc:
+   - Add `TaleQuestsAPI-1.0.x-sources.jar` to the same libs/ folder.
+   - In IntelliJ: File > Project Structure > Libraries
+     find TaleQuestsAPI > "+" > Sources > select the -sources.jar.
+
 ## Quick Start
 
 Here is a minimal plugin that registers a quest and listens for its completion:
